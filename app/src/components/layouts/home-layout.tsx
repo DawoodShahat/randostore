@@ -1,9 +1,13 @@
 import { Outlet } from "react-router";
+import Navbar from "@/components/navbar";
 
 export default function HomeLayout() {
   return (
-    <main>
-      <Outlet />
-    </main>
+    <>
+      <Navbar />
+      <main className="py-8">
+        <Outlet />
+      </main>
+    </>
   );
 }

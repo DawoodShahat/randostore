@@ -1,14 +1,16 @@
+import { appSettings } from "@/lib/settings";
+
 interface Item {
   id?: number;
   name: string;
   price: number;
-  image: string;
+  img: string;
 }
 
-const API_BASE_URL = 'http://localhost:4000/items';
+const API_BASE_URL = appSettings.baseURL;
 
 export const getAllItems = async (): Promise<Item[]> => {
-  const response = await fetch(API_BASE_URL);
+  const response = await fetch(`${API_BASE_URL}/items`);
   return response.json();
 };
 
@@ -17,11 +19,11 @@ export const getItemById = async (id: number): Promise<Item> => {
   return response.json();
 };
 
-export const createItem = async (item: Omit<Item, 'id'>): Promise<Item> => {
+export const createItem = async (item: Omit<Item, "id">): Promise<Item> => {
   const response = await fetch(API_BASE_URL, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(item),
   });
@@ -30,13 +32,13 @@ export const createItem = async (item: Omit<Item, 'id'>): Promise<Item> => {
 
 export const updateItem = async (item: Item): Promise<Item> => {
   if (!item.id) {
-    throw new Error('Item ID is required for updates');
+    throw new Error("Item ID is required for updates");
   }
 
   const response = await fetch(`${API_BASE_URL}/${item.id}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(item),
   });
@@ -45,7 +47,7 @@ export const updateItem = async (item: Item): Promise<Item> => {
 
 export const deleteItem = async (id: number): Promise<Item> => {
   const response = await fetch(`${API_BASE_URL}/${id}`, {
-    method: 'DELETE',
+    method: "DELETE",
   });
   return response.json();
 };
