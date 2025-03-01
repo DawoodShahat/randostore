@@ -33,7 +33,10 @@ export default function AddItemForm({
   const { mutate: mutateAddItem, isPending } = useAddItemMutation({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["items"] });
-      toast.success("Item added successfully");
+      toast.success("Item added successfully", {
+        duration: 2000,
+        position: "top-center",
+      });
       closeDialog();
     },
   });

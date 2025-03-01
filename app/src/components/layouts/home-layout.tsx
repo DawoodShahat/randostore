@@ -7,7 +7,7 @@ export default function HomeLayout() {
     <>
       <Toaster position="top-right" />
       <Navbar />
-      <main className="py-8">
+      <main className="py-8 px-7 md:px-0">
         <Outlet />
       </main>
     </>

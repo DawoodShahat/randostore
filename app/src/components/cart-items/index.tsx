@@ -1,6 +1,8 @@
 import { appSettings } from "@/lib/settings";
 import { useCartStore } from "@/lib/stores/cart-store";
 import { Button } from "../ui/button";
+import { useNavigate } from "react-router";
+
 type CartItem = {
   id: number;
   name: string;
@@ -38,10 +40,15 @@ const CartItem = ({
 
 export default function CartItems() {
   const { items, getTotalPrice } = useCartStore();
+  const navigate = useNavigate();
   const totalPrice = getTotalPrice().toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
   });
+
+  const handleCheckout = () => {
+    navigate("/order-placed");
+  };
 
   return (
     <div>
@@ -64,7 +71,7 @@ export default function CartItems() {
       </div>
 
       <div className="flex items-center justify-end">
-        <Button>Checkout</Button>
+        <Button onClick={handleCheckout}>Checkout</Button>
       </div>
     </div>
   );

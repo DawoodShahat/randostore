@@ -4,6 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/lib/stores/cart-store";
 import { toast } from "sonner";
+
 type Item = {
   id: number;
   name: string;
@@ -25,13 +26,13 @@ const Item = ({ id, name, priceFormatted, img, price }: Item) => {
   };
 
   return (
-    <div className="border border-gray-300 rounded-xl p-4 w-fit">
+    <div className="border border-gray-300 rounded-xl p-4 w-full md:w-fit">
       <img
         height={300}
         width={300}
         src={url}
         alt={name}
-        className="rounded-xl h-[250px] object-cover"
+        className="rounded-xl w-full md:h-[250px] object-cover"
       />
       <h1 className="text-lg font-medium mt-4">{name}</h1>
       <p className="text-sm text-gray-500">${priceFormatted}</p>
@@ -64,7 +65,7 @@ export default function Items() {
   }
 
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {items?.map((item) => (
         <Item
           key={item.id}

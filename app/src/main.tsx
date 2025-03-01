@@ -8,7 +8,7 @@ import HomeLayout from "@/components/layouts/home-layout.tsx";
 import { BrowserRouter, Route, Routes } from "react-router";
 import Home from "@/pages/home.tsx";
 import Cart from "@/pages/cart.tsx";
-
+import OrderPlaced from "@/pages/order-placed.tsx";
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
@@ -19,6 +19,7 @@ createRoot(document.getElementById("root")!).render(
           <Route element={<HomeLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/order-placed" element={<OrderPlaced />} />
           </Route>
         </Routes>
       </BrowserRouter>
