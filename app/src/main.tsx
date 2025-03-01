@@ -7,6 +7,7 @@ import HomeLayout from "@/components/layouts/home-layout.tsx";
 
 import { BrowserRouter, Route, Routes } from "react-router";
 import Home from "@/pages/home.tsx";
+import Cart from "@/pages/cart.tsx";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route element={<HomeLayout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
           </Route>
         </Routes>
       </BrowserRouter>

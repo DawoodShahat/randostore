@@ -2,9 +2,10 @@ import { useGetAllItemsQuery } from "@/api/queries/use-get-all-items-query";
 import { appSettings } from "@/lib/settings";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-
+import { useCartStore } from "@/lib/stores/cart-store";
+import { toast } from "sonner";
 type Item = {
-  id?: number;
+  id: number;
   name: string;
   price: number;
   img: string;
@@ -12,7 +13,16 @@ type Item = {
 };
 
 const Item = ({ id, name, priceFormatted, img, price }: Item) => {
-  const url = `${appSettings.baseURL}/${img}`;
+  const { addItem } = useCartStore();
+  const url = img.includes("http") ? img : `${appSettings.baseURL}/${img}`;
+
+  const handleAddToCart = () => {
+    addItem({ id, name, price, img, quantity: 1, priceFormatted });
+    toast.success(`Item: ${name} added to cart`, {
+      duration: 2000,
+      position: "top-center",
+    });
+  };
 
   return (
     <div className="border border-gray-300 rounded-xl p-4 w-fit">
@@ -26,7 +36,9 @@ const Item = ({ id, name, priceFormatted, img, price }: Item) => {
       <h1 className="text-lg font-medium mt-4">{name}</h1>
       <p className="text-sm text-gray-500">${priceFormatted}</p>
 
-      <Button className="mt-4 w-full">Add to Cart</Button>
+      <Button className="mt-4 w-full" onClick={handleAddToCart}>
+        Add to Cart
+      </Button>
     </div>
   );
 };

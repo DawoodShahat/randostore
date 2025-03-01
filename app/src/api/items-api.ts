@@ -20,7 +20,7 @@ export const getItemById = async (id: number): Promise<Item> => {
 };
 
 export const createItem = async (item: Omit<Item, "id">): Promise<Item> => {
-  const response = await fetch(API_BASE_URL, {
+  const response = await fetch(`${API_BASE_URL}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
